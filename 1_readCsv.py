@@ -1,4 +1,4 @@
-with open("employees.txt", 'r') as file:
+with open("data/employees.txt", 'r') as file:
     ans = []
     for line in file:
         name, dept, sal = line.strip().split(',')
