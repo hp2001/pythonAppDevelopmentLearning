@@ -9,7 +9,7 @@ input_file = Path(args.input)
 output_file = Path(args.output)
 
 if input_file.exists():
-    with open(input_file, 'r') as input_f, open(output_file, 'w') as output_f:
+    with open(input_file, 'r') as input_f, open(output_file, 'w', newline='') as output_f:
         reader = csv.reader(input_f)
         writer = csv.writer(output_f)
         next(reader)  # Skip header
