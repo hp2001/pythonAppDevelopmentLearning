@@ -5,6 +5,7 @@ from pathlib import Path
 def process_file(input_file, output_file):
     if input_file.exists():
         with open(input_file, 'r') as input_f, open(output_file, 'w', newline='') as output_f:
+            logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s", filename="data/logs/logfile.log", filemode='a')
             cnt = 0
             invalid_records = 0
             reader = csv.reader(input_f)
@@ -14,6 +15,7 @@ def process_file(input_file, output_file):
             for row in reader:
                 if len(row) != 3:
                     invalid_records += 1
+                    logging.warning(f"Invalid record (wrong number of columns): {row}")
                     continue  # Skip rows that don't have exactly 3 columns
                 name, dept, sal = row
                 try:
@@ -29,7 +31,6 @@ def process_file(input_file, output_file):
         raise FileNotFoundError
     return cnt, invalid_records
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
